@@ -1,9 +1,39 @@
+import { BrowserRouter, Routes, Route } from "react-router"
+import Home from "./pages/Home"
+import Login from "./pages/Login"
+import Signup from "./pages/Signup"
+import Auth from "./pages/Auth"
+import HomeLayout from "./pages/HomeLayout"
+import Help from "./pages/Help"
+import Docs from "./pages/Docs"
+
 function App() {
 
   return (
-    <div className="min-h-screen min-w-screen bg-purple-500">
-      <h1 className="text-2xl md:text-3xl lg:text-4xl">test</h1>
-    </div>
+
+    // <div className="h-screen w-screen">
+    <BrowserRouter>
+      <Routes>
+
+        <Route path="/" element={<HomeLayout />} >
+          <Route index element={<Home />} />
+          <Route path="help" element={<Help />} />
+          <Route path="docs" element={<Docs />} />
+        </Route>
+
+
+        <Route path="/auth" element={<Auth />}>
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+        </Route>
+
+
+        <Route path="/app" element={<App />} />
+
+      </Routes>
+    </BrowserRouter>
+
+
 
   )
 }
