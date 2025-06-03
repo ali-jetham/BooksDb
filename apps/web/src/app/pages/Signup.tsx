@@ -6,7 +6,6 @@ declare global {
   }
 }
 
-
 type CredentialResponse = {
   credential: string
   select_by: string
@@ -26,7 +25,7 @@ export default function Signup(): React.JSX.Element {
         client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
         callback: handleCredentialResponse,
         ux_mode: "redirect",
-        login_uri: "https://yeti-measured-correctly.ngrok-free.app/api/auth/register/google",
+        login_uri: "https://yeti-measured-correctly.ngrok-free.app/api/auth/google",
         use_fedcm_for_prompt: true,
         auto_select: false,
         context: "signup"
@@ -47,8 +46,7 @@ export default function Signup(): React.JSX.Element {
   return (
     <div>
       <h1 className="pb-10 text-center text-2xl">Sign up</h1>
-      <div ref={googleSignInBtnRef} id="buttonDiv">
-      </div>
+      <div ref={googleSignInBtnRef} id="buttonDiv"></div>
     </div>
   )
 };
