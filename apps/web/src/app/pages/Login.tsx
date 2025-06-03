@@ -1,7 +1,7 @@
 export default function Login(): React.JSX.Element {
   return (
     <div>
-      <h1>This is Login</h1>
+      <h1 className="pb-10 text-2xl">Login</h1>
     </div>
   )
 };

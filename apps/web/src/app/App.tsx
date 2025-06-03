@@ -6,12 +6,11 @@ import Auth from "./pages/Auth"
 import HomeLayout from "./pages/HomeLayout"
 import Help from "./pages/Help"
 import Docs from "./pages/Docs"
+import LifeDb from "./LifeDb"
 
 function App() {
 
   return (
-
-    // <div className="h-screen w-screen">
     <BrowserRouter>
       <Routes>
 
@@ -28,13 +27,10 @@ function App() {
         </Route>
 
 
-        <Route path="/app" element={<App />} />
+        <Route path="/app" element={<LifeDb />} />
 
       </Routes>
     </BrowserRouter>
-
-
-
   )
 }
 
