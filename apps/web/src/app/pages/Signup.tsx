@@ -16,7 +16,7 @@ export default function Signup(): React.JSX.Element {
   const googleSignInBtnRef = useRef(null)
 
   function handleCredentialResponse(response: CredentialResponse): void {
-    console.log(response)
+    console.log(response.credential)
   }
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export default function Signup(): React.JSX.Element {
   return (
     <div>
       <h1 className="pb-10 text-center text-2xl">Sign up</h1>
-      <div ref={googleSignInBtnRef} id="buttonDiv"></div>
+      <div ref={googleSignInBtnRef} id="buttonDiv" />
     </div>
   )
 };
