@@ -28,7 +28,8 @@
         "useSortedClasses": "warn"
       },
       "style": {
-        "noUnusedTemplateLiteral": "warn"
+        "noUnusedTemplateLiteral": "warn",
+        "noInferrableTypes": "off"
       }
     }
   },
