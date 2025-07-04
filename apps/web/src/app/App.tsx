@@ -7,8 +7,17 @@ import HomeLayout from "./pages/HomeLayout"
 import Help from "./pages/Help"
 import Docs from "./pages/Docs"
 import LifeDb from "./LifeDb"
+import ProtectedRoute from "./pages/ProtectedRoute"
+import { useEffect } from "react"
+import { useAuthStore } from "../store/useAuthStore"
 
 function App() {
+
+
+
+  useEffect(() => {
+    useAuthStore.getState().init();
+  }, [])
 
   return (
     <BrowserRouter>
@@ -21,13 +30,16 @@ function App() {
         </Route>
 
 
+
+
         <Route path="/auth" element={<Auth />}>
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
         </Route>
 
-
-        <Route path="/app" element={<LifeDb />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/app" element={<LifeDb />} />
+        </Route>
 
       </Routes>
     </BrowserRouter>

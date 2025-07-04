@@ -24,9 +24,8 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
 
   }, [])
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [id, setId] = useState("")
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   function login() {
 
