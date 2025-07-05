@@ -30,6 +30,9 @@
       "style": {
         "noUnusedTemplateLiteral": "warn",
         "noInferrableTypes": "off"
+      },
+      "complexity": {
+        "useArrowFunction": "off"
       }
     }
   },
