@@ -37,7 +37,8 @@ export const useAuthStore = create<AuthStore>((set) => ({
 	refresh: async () => {
 		set({ refreshing: true });
 		try {
-			await api.post("/auth/refresh");
+			console.log("Refreshing access token");
+			await api.post("/token/refresh");
 			useAuthStore.getState().init();
 		} catch (error) {
 			console.error("Token refresh failed", error);
