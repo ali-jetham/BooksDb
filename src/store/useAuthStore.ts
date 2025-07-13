@@ -5,8 +5,7 @@ import { api } from "../utils/api";
 type AuthStore = {
 	isAuthenticated: boolean;
 	id: string | undefined;
-	loading: boolean;
-	refreshing: boolean;
+	isLoading: boolean;
 	init: () => void;
 	refresh: () => void;
 	setIsAuthenticated: (val: boolean) => void;
@@ -14,9 +13,8 @@ type AuthStore = {
 
 export const useAuthStore = create<AuthStore>((set) => ({
 	isAuthenticated: false,
+	isLoading: true,
 	id: undefined,
-	loading: true,
-	refreshing: false,
 
 	init: async function () {
 		try {
@@ -25,26 +23,24 @@ export const useAuthStore = create<AuthStore>((set) => ({
 			set({
 				isAuthenticated: res.data.isAuthenticated,
 				id: res.data.id,
-				loading: false,
+				isLoading: false,
 			});
 		} catch (error) {
 			console.error(`Cannot authenticate user, ${error}`);
-		} finally {
-			set({ loading: false });
+			set({ isAuthenticated: false, isLoading: false });
 		}
 	},
 
 	refresh: async () => {
-		set({ refreshing: true });
+		set({ isLoading: true });
 		try {
 			console.log("Refreshing access token");
-			await api.post("/token/refresh");
+			const res = await api.get("/token/refresh");
+			console.log(`Token refresh result: ${res}`);
 			useAuthStore.getState().init();
 		} catch (error) {
 			console.error("Token refresh failed", error);
-			set({ isAuthenticated: false, id: undefined });
-		} finally {
-			set({ refreshing: false });
+			set({ isLoading: false });
 		}
 	},
 

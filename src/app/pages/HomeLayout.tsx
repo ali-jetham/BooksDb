@@ -8,8 +8,6 @@ export default function HomeLayout(): React.JSX.Element {
   return (
     <div>
       <Header />
-
-
       <main className="flex justify-center pt-10">
         <Outlet />
       </main>

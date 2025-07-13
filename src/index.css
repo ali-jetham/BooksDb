@@ -1,12 +1,21 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* instead of dark:* utilities based on prefers-color-scheme, applied based on dark class */
+/* @custom-variant dark (&:where(.dark, .dark *)); */
+
 
 @theme {
+
+  --font-sans: "Roboto", sans;
+
+  /* --breakpoint-smd: 44rem; */
+
   --color-folly: #EF4764;
   --color-sunglow: #FFD166;
   --color-emerald: #06D6A0;
   --color-blue: #118AB2;
   --color-midnightgreen: #073B4C;
 }
+
+html {}

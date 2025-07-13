@@ -6,6 +6,16 @@ import { NavLink } from "react-router";
 
 export default function Header(): React.JSX.Element {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const navLinks = [
+    { to: "/", label: "Home" },
+    { to: "/help", label: "Help" },
+    { to: "/docs", label: "Docs" },
+  ];
+
+  const navLinksElements = navLinks.map((link) =>
+    <NavLink to={link.to} className={({ isActive }) =>
+      `rounded px-2 py-0.5 ${isActive ? "bg-blue-400 text-white" : ""}`
+    }>{link.label}</NavLink >)
 
   return (
     <header className="flex items-center justify-center p-4 shadow-2xl">
@@ -39,26 +49,8 @@ export default function Header(): React.JSX.Element {
           </button>
         </div>
 
-
         <div className="flex flex-col items-stretch px-4 text-2xl">
-          <NavLink
-            to="/" className={({ isActive }) =>
-              `rounded px-2 py-0.5 ${isActive ? "bg-blue-400 text-white" : ""}`
-            }
-          >Home
-          </NavLink>
-          <NavLink
-            to="/help" className={({ isActive }) =>
-              `rounded px-2 py-0.5 ${isActive ? "bg-blue-400 text-white" : ""}`
-            }
-          >Help
-          </NavLink>
-          <NavLink
-            to="/docs" className={({ isActive }) =>
-              `rounded px-2 py-0.5 ${isActive ? "bg-blue-400 text-white" : ""}`
-            }
-          >Docs
-          </NavLink>
+          {navLinksElements}
         </div>
       </nav>
 

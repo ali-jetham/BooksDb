@@ -1,49 +1,34 @@
-import { BrowserRouter, Routes, Route } from "react-router"
-import Home from "./pages/Home"
-import Login from "./pages/Login"
-import Signup from "./pages/Signup"
-import Auth from "./pages/Auth"
-import HomeLayout from "./pages/HomeLayout"
-import Help from "./pages/Help"
-import Docs from "./pages/Docs"
-import LifeDb from "./LifeDb"
-import ProtectedRoute from "./pages/ProtectedRoute"
-import { useEffect } from "react"
-import { useAuthStore } from "../store/useAuthStore"
+import { BrowserRouter, Route, Routes } from "react-router";
+import LifeDb from "./LifeDb";
+import Auth from "./pages/Auth";
+import Docs from "./pages/Docs";
+import Help from "./pages/Help";
+import Home from "./pages/Home";
+import HomeLayout from "./pages/HomeLayout";
 
 function App() {
+	return (
+		<div className="h-screen min-h-screen w-screen min-w-screen">
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<HomeLayout />}>
+						<Route index element={<Home />} />
+						<Route path="help" element={<Help />} />
+						<Route path="docs" element={<Docs />} />
+					</Route>
 
+					{/* <Route path="/auth" element={<Auth />}> */}
+					<Route path="/auth/login" element={<Auth type="signin" />} />
+					<Route path="/auth/signup" element={<Auth type="signup" />} />
+					{/* </Route> */}
 
-
-  useEffect(() => {
-    useAuthStore.getState().init();
-  }, [])
-
-  return (
-    <BrowserRouter>
-      <Routes>
-
-        <Route path="/" element={<HomeLayout />} >
-          <Route index element={<Home />} />
-          <Route path="help" element={<Help />} />
-          <Route path="docs" element={<Docs />} />
-        </Route>
-
-
-
-
-        <Route path="/auth" element={<Auth />}>
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Signup />} />
-        </Route>
-
-        <Route element={<ProtectedRoute />}>
-          <Route path="/app" element={<LifeDb />} />
-        </Route>
-
-      </Routes>
-    </BrowserRouter>
-  )
+					{/* <Route element={<ProtectedRoute />}> */}
+					<Route path="/app" element={<LifeDb />} />
+					{/* </Route> */}
+				</Routes>
+			</BrowserRouter>
+		</div>
+	);
 }
 
-export default App
+export default App;
