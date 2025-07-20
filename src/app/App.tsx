@@ -24,6 +24,7 @@ function App() {
 
 					{/* <Route element={<ProtectedRoute />}> */}
 					<Route path="/app" element={<LifeDb />} />
+					<Route path="/app/:type" element={<LifeDb />} />
 					{/* </Route> */}
 				</Routes>
 			</BrowserRouter>

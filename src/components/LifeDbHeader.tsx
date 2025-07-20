@@ -1,13 +1,18 @@
-import { DatabaseIcon, StackPlusIcon } from "@phosphor-icons/react";
+import { CircleIcon, DatabaseIcon, GearIcon } from "@phosphor-icons/react";
 
 export default function LifeDbHeader(): React.JSX.Element {
 	return (
-		<header className="mb-10 flex items-center justify-between bg-white p-1 dark:bg-neutral-700">
+		<header className="flex items-center justify-between">
 			<DatabaseIcon color="#EF4764" size={"3rem"} />
 
-			<button type="button">
-				<StackPlusIcon className="fill-black dark:fill-white" size={"2rem"} />
-			</button>
+			<div className="gap-3">
+				<button type="button">
+					<GearIcon size={"2rem"} className="dark:fill-white" />
+				</button>
+				<button type="button">
+					<CircleIcon className="fill-black dark:fill-white" size={"2rem"} />
+				</button>
+			</div>
 		</header>
 	);
 }
