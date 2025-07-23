@@ -8,7 +8,6 @@ import { api } from "../utils/api";
 type LifeDbMainProps = {
 	type: string | undefined;
 };
-type RowData = { name: string; description: string };
 
 export default function LifeDbMain({ type }: LifeDbMainProps): React.JSX.Element {
 	const setShowCreateDbModal = useAppUiStore((state) => state.actions.setShowCreateDbModal);
@@ -16,7 +15,7 @@ export default function LifeDbMain({ type }: LifeDbMainProps): React.JSX.Element
 
 	const colorScheme = themeQuartz.withPart(colorSchemeDarkWarm);
 	const [rowData, setRowData] = useState([]);
-	const [colDefs] = useState<ColDef<RowData>[]>([{ field: "name" }, { field: "description" }]);
+	const [colDefs, setColDefs] = useState<ColDef[]>();
 
 	useEffect(() => {
 		async function fetchData() {

@@ -5,6 +5,7 @@ import Docs from "./pages/Docs";
 import Help from "./pages/Help";
 import Home from "./pages/Home";
 import HomeLayout from "./pages/HomeLayout";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 function App() {
 	return (
@@ -22,10 +23,10 @@ function App() {
 					<Route path="/auth/signup" element={<Auth type="signup" />} />
 					{/* </Route> */}
 
-					{/* <Route element={<ProtectedRoute />}> */}
-					<Route path="/app" element={<LifeDb />} />
-					<Route path="/app/:type" element={<LifeDb />} />
-					{/* </Route> */}
+					<Route element={<ProtectedRoute />}>
+						<Route path="/app" element={<LifeDb />} />
+						<Route path="/app/:type" element={<LifeDb />} />
+					</Route>
 				</Routes>
 			</BrowserRouter>
 		</div>

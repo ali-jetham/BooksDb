@@ -18,7 +18,6 @@ export default function LifeDb(): React.JSX.Element {
 		<div className="flex h-full w-full flex-col items-center bg-white p-4 dark:bg-neutral-800">
 			<div className="flex flex-col gap-10 md:w-[60%]">
 				<LifeDbHeader />
-
 				<hr />
 				{showLifeDbMain && <LifeDbMain type={type} />}
 				{showAddDbModal && <AddDbModal />}
