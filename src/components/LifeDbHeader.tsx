@@ -1,9 +1,12 @@
 import { CircleIcon, DatabaseIcon, GearIcon } from "@phosphor-icons/react";
+import { NavLink } from "react-router";
 
 export default function LifeDbHeader(): React.JSX.Element {
 	return (
 		<header className="flex items-center justify-between">
-			<DatabaseIcon color="#EF4764" size={"3rem"} />
+			<NavLink to={"/app/books"}>
+				<DatabaseIcon color="#EF4764" size={"3rem"} />
+			</NavLink>
 
 			<div className="gap-3">
 				<button type="button">

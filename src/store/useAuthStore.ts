@@ -1,5 +1,5 @@
 import { create } from "zustand/react";
-import { api } from "../utils/api";
+import { api } from "../api/api";
 
 // TODO: separate actions from state
 type AuthStore = {
@@ -17,7 +17,10 @@ export const useAuthStore = create<AuthStore>((set) => ({
 	id: undefined,
 
 	init: async function () {
+		console.log("useAuthStore: init called");
+
 		try {
+			set({ isLoading: true });
 			const res = await api.get("/auth/me");
 			console.log(res.data.isAuthenticated);
 			set({

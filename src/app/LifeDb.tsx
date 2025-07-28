@@ -1,26 +1,27 @@
 import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 import { useParams } from "react-router";
 import LifeDbHeader from "../components/LifeDbHeader";
+
 import LifeDbMain from "../components/LifeDbMain";
-import AddDbModal from "../components/modals/AddDbModal";
+import ModalManager from "../components/modals/ModalManger";
 import { useAppUiStore } from "../store/useAppUiStore";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 export default function LifeDb(): React.JSX.Element {
 	let params = useParams();
+	// FIXME: i think this needs to be a state
 	const type = params.type;
 	console.log(`type: ${type}`);
-	const showAddDbModal = useAppUiStore((state) => state.showCreateDbModal);
-	const showLifeDbMain = useAppUiStore((state) => state.showLifeDbMain);
+	const activeModal = useAppUiStore((state) => state.activeModal);
 
 	return (
-		<div className="flex h-full w-full flex-col items-center bg-white p-4 dark:bg-neutral-800">
-			<div className="flex flex-col gap-10 md:w-[60%]">
+		<div className="flex-1 min-h-screen scrollbar-thumb-neutral-600 scrollbar-track-[transparent] flex h-full w-full flex-col items-center p-4">
+			<div className="flex flex-1 flex-col w-[98%] gap-10 items-stretch  sm:w-[80%] sm:w-[70%]">
 				<LifeDbHeader />
 				<hr />
-				{showLifeDbMain && <LifeDbMain type={type} />}
-				{showAddDbModal && <AddDbModal />}
+				<LifeDbMain type={type} />
+				<ModalManager modalType={activeModal} />
 			</div>
 		</div>
 	);

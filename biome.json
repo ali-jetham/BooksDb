@@ -30,7 +30,8 @@
 			"recommended": true,
 			"correctness": {
 				"noUnusedVariables": "off",
-				"noUnusedImports": "off"
+				"noUnusedImports": "off",
+				"useExhaustiveDependencies": "warn"
 			},
 			"nursery": {
 				"useSortedClasses": "warn"

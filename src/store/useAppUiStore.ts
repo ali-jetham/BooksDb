@@ -1,21 +1,19 @@
 import { create } from "zustand";
 
+export type ActiveModal = "addDb" | "addBook" | undefined;
+
 type AppUi = {
-	showLifeDbMain: boolean;
-	showCreateDbModal: boolean;
+	activeModal: ActiveModal;
 
 	actions: {
-		setShowLifeDbMain: (show: boolean) => void;
-		setShowCreateDbModal: (show: boolean) => void;
+		setActiveModal: (modal: ActiveModal) => void;
 	};
 };
 
 export const useAppUiStore = create<AppUi>((set) => ({
-	showLifeDbMain: true,
-	showCreateDbModal: false,
+	activeModal: undefined,
 
 	actions: {
-		setShowLifeDbMain: (show: boolean) => set({ showLifeDbMain: show }),
-		setShowCreateDbModal: (show: boolean) => set({ showCreateDbModal: show }),
+		setActiveModal: (modal) => set({ activeModal: modal }),
 	},
 }));

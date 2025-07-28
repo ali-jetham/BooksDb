@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@plugin 'tailwind-scrollbar';
+
 
 /* instead of dark:* utilities based on prefers-color-scheme, applied based on dark class */
 /* @custom-variant dark (&:where(.dark, .dark *)); */
@@ -18,4 +20,10 @@
   --color-midnightgreen: #073B4C;
 }
 
-html {}
+html {
+
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+
+}
