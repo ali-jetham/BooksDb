@@ -5,5 +5,5 @@ import viteBasicSslPlugin from "@vitejs/plugin-basic-ssl";
 
 export default defineConfig({
 	plugins: [react(), tailwindcss(), viteBasicSslPlugin()],
-	server: { https: true },
+	server: { https: false, allowedHosts: ["lifedb.alijetham.com"] },
 });
