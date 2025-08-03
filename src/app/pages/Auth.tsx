@@ -19,7 +19,7 @@ export default function Auth(props: AuthProps): React.JSX.Element {
 				google.accounts.id.initialize({
 					client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
 					ux_mode: "redirect",
-					login_uri: "https://yeti-measured-correctly.ngrok-free.app/api/auth/google",
+					login_uri: import.meta.env.VITE_GOOGLE_LOGIN_URI,
 					use_fedcm_for_prompt: true,
 					auto_select: false,
 					context: props.type,
