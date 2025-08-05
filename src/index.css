@@ -13,7 +13,18 @@
 
   /* --breakpoint-smd: 44rem; */
 
-  --color-folly: #EF4764;
+  --color-folly-50: hsl(348, 85%, 97%);
+  --color-folly-100: hsl(348, 85%, 92%);
+  --color-folly-200: hsl(348, 85%, 85%);
+  --color-folly-300: hsl(348, 85%, 75%);
+  --color-folly-400: hsl(348, 85%, 65%);
+  --color-folly-500: #EF4764;
+  --color-folly-600: hsl(348, 85%, 45%);
+  --color-folly-700: hsl(348, 85%, 38%);
+  --color-folly-800: hsl(348, 85%, 30%);
+  --color-folly-900: hsl(348, 85%, 20%);
+
+
   --color-sunglow: #FFD166;
   --color-emerald: #06D6A0;
   --color-blue: #118AB2;

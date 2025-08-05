@@ -1,10 +1,10 @@
 import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 import { useParams } from "react-router";
-import LifeDbHeader from "../components/LifeDbHeader";
+import LifeDbHeader from "../../components/LifeDbHeader";
 
-import LifeDbMain from "../components/LifeDbMain";
-import ModalManager from "../components/modals/ModalManger";
-import { useAppUiStore } from "../store/useAppUiStore";
+import ModalManager from "../../components/modals/ModalManger";
+import { useAppUiStore } from "../../store/useAppUiStore";
+import { Outlet } from "react-router";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -16,11 +16,11 @@ export default function LifeDb(): React.JSX.Element {
 	const activeModal = useAppUiStore((state) => state.activeModal);
 
 	return (
-		<div className="flex-1 min-h-screen scrollbar-thumb-neutral-600 scrollbar-track-[transparent] flex h-full w-full flex-col items-center p-4">
-			<div className="flex flex-1 flex-col w-[98%] gap-10 items-stretch  sm:w-[80%] sm:w-[70%]">
+		<div className="scrollbar-thumb-neutral-600 scrollbar-track-[transparent] flex h-full min-h-screen w-full flex-1 flex-col items-center p-4">
+			<div className="flex w-[98%] flex-1 flex-col items-stretch gap-6 sm:w-[70%]">
 				<LifeDbHeader />
 				<hr />
-				<LifeDbMain type={type} />
+				<Outlet />
 				<ModalManager modalType={activeModal} />
 			</div>
 		</div>

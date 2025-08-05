@@ -59,7 +59,7 @@ export default function AddBookModal(): React.JSX.Element {
 	useEffect(() => {
 		const el = itemRefs.current[focusedItem];
 		if (el) el.scrollIntoView({ block: "nearest" });
-	}, [focusedItem, items.length]);
+	}, [focusedItem]);
 
 	return (
 		<Modal

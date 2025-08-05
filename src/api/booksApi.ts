@@ -4,7 +4,6 @@ import { api } from "./api";
 
 async function search(searchTerm: string) {
 	if (searchTerm === "") return;
-
 	try {
 		const res = await api.get("books/search", { params: { q: searchTerm } });
 		return res.data;
@@ -30,4 +29,13 @@ async function update(userBookId: string, bookData: Partial<BookRowData>) {
 	}
 }
 
-export const booksApi = { search, add, update };
+async function get(userBookId: string) {
+	try {
+		const res = await api.get(`books/${userBookId}`);
+		return res.data;
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+export const booksApi = { search, get, add, update };

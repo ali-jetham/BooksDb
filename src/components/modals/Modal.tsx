@@ -77,7 +77,7 @@ export default function Modal({
 
 			setTimeout(() => {
 				hasMouseMoved.current = false;
-			}, 2500);
+			}, 3000);
 		}
 
 		document.addEventListener("keydown", handleKeyDown);
@@ -93,7 +93,7 @@ export default function Modal({
 
 	return (
 		<div className="fixed inset-0 z-999 flex items-start justify-center backdrop-blur-sm">
-			<div className="mt-30 flex w-[90%] flex-col p-4 gap-4 rounded-md dark:bg-neutral-700 md:max-w-[50%]">
+			<div className="mt-30 flex w-[90%] flex-col gap-4 rounded-md p-4 md:max-w-[50%] dark:bg-neutral-700">
 				<div className="flex w-[100%] items-center gap-3">
 					<input
 						ref={inputRef}
@@ -108,7 +108,7 @@ export default function Modal({
 					<button
 						type="button"
 						onClick={handleSearch}
-						className={`h-10 rounded-md bg-folly px-8 outline-none hover:cursor-pointer`}
+						className={`h-10 rounded-md bg-folly-500 px-8 outline-none hover:cursor-pointer`}
 					>
 						{isLoading ? "Loading..." : "Search"}
 					</button>

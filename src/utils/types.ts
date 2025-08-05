@@ -1,4 +1,5 @@
 import ImgRenderer from "../components/cellRenderer/ImgRenderer";
+import LinkRenderer from "../components/cellRenderer/LinkRenderer";
 
 type BookStatus = "ToRead" | "Reading" | "Read" | "Paused" | "Abandoned";
 
@@ -27,27 +28,28 @@ export type BookRowData = {
 };
 
 export const bookColDef = [
-	{ headerName: "Title", field: "title", width: 300 },
+	{ headerName: "Title", field: "title", width: 300, cellRenderer: LinkRenderer },
 	{
 		headerName: "Cover",
 		field: "coverUrl",
-		cellRenderer: ImgRenderer,
 		width: 120,
 		resizable: false,
+		cellRenderer: ImgRenderer,
 	},
 	{
 		headerName: "Rating",
 		field: "rating",
 		editable: true,
+		width: 100,
 	},
 	{ headerName: "Author", field: "authors" },
-	{ headerName: "Status", field: "status" },
+	{ headerName: "Status", field: "status", width: 100 },
 	{ headerName: "Genre", field: "genre" },
-	{ headerName: "Pages", field: "pageCount" },
-	{ headerName: "Created on", field: "dateAdded", editable: true },
-	{ headerName: "Started", field: "dateStarted", editable: true },
-	{ headerName: "Completed", field: "dateFinished", editable: true },
-	{ headerName: "ISBN10", field: "isbn10" },
-	{ headerName: "ISBN13", field: "isbn13" },
+	{ headerName: "Pages", field: "pageCount", width: 100 },
+	{ headerName: "Created on", field: "dateAdded", editable: true, width: 120 },
+	{ headerName: "Started", field: "dateStarted", editable: true, width: 120 },
+	{ headerName: "Completed", field: "dateFinished", editable: true, width: 120 },
+	{ headerName: "ISBN10", field: "isbn10", width: 120 },
+	{ headerName: "ISBN13", field: "isbn13", width: 120 },
 	{ headerName: "Published On", field: "publicationDate" },
 ];

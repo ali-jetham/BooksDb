@@ -1,22 +1,18 @@
 import { PlusIcon } from "@phosphor-icons/react";
-import {
-	colorSchemeDarkWarm,
-	themeQuartz,
-	type ColDef,
-	type GetCellValueParams,
-} from "ag-grid-community";
+import { colorSchemeDarkWarm, themeQuartz, type ColDef } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import { useEffect, useState } from "react";
 import { api } from "../api/api";
 import { useAppUiStore, type ActiveModal } from "../store/useAppUiStore";
 import { bookColDef } from "../utils/types";
 import { booksApi } from "../api/booksApi";
+import { useParams } from "react-router";
 
 type LifeDbMainProps = {
 	type: string | undefined;
 };
 
-export default function LifeDbMain({ type }: LifeDbMainProps): React.JSX.Element {
+export default function LifeDbMain(): React.JSX.Element {
 	const setActiveModal = useAppUiStore((state) => state.actions.setActiveModal);
 	const colorScheme = themeQuartz.withPart(colorSchemeDarkWarm).withParams({
 		accentColor: "#EF4764",
@@ -25,16 +21,13 @@ export default function LifeDbMain({ type }: LifeDbMainProps): React.JSX.Element
 		rowBorder: false,
 		backgroundColor: "#262626",
 	});
+	const { type } = useParams();
 	const [rowData, setRowData] = useState([]);
 	const [colDefs, setColDefs] = useState<ColDef[]>(bookColDef);
 
-	// const defaultColDef = {
-	// 	width: 150,
-	// 	cellStyle: { fontWeight: "bold" },
-	// };
-
 	// FIXME: make sure this runs first completely before loading rowData in the AgGridReact component
 	useEffect(() => {
+		// TODO: maybe this should be called from the <type>Api file
 		async function fetchData() {
 			const res = await api.get(`/${type}`);
 			console.log(res.data);
@@ -74,7 +67,7 @@ export default function LifeDbMain({ type }: LifeDbMainProps): React.JSX.Element
 				<h1 className="prose text-center text-3xl text-gray-300">Your {type ?? "databases"}</h1>
 
 				<button
-					className="flex items-center gap-0.5 rounded-md bg-folly p-1"
+					className="flex items-center gap-0.5 rounded-md bg-folly-500 p-1"
 					type="button"
 					onClick={() => {
 						handleClick();

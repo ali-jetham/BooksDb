@@ -11,7 +11,7 @@ export default function Home(): React.JSX.Element {
 			<p className="pb-6 text-2xl">Organize your </p> */}
 			<Link
 				to={"/auth/signup"}
-				className="cursor-pointer rounded-[.4rem] bg-folly px-6 py-2 text-center font-semibold text-white"
+				className="cursor-pointer rounded-[.4rem] bg-folly-500 px-6 py-2 text-center font-semibold text-white"
 			>
 				Sign Up
 			</Link>

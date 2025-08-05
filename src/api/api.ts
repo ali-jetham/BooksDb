@@ -5,7 +5,6 @@ import { useAuthStore } from "../store/useAuthStore";
 let retry = false;
 
 export const api = axios.create({
-	// TODO: change this in prod
 	baseURL: import.meta.env.VITE_BACKEND_URL,
 	withCredentials: true,
 });

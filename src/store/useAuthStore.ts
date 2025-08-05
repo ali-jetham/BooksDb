@@ -6,8 +6,10 @@ type AuthStore = {
 	isAuthenticated: boolean;
 	id: string | undefined;
 	isLoading: boolean;
-	init: () => void;
+	login: () => void;
+	logout: () => void;
 	refresh: () => void;
+	revoke: () => Promise<boolean>;
 	setIsAuthenticated: (val: boolean) => void;
 };
 
@@ -16,7 +18,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
 	isLoading: true,
 	id: undefined,
 
-	init: async function () {
+	login: async function () {
 		console.log("useAuthStore: init called");
 
 		try {
@@ -34,16 +36,35 @@ export const useAuthStore = create<AuthStore>((set) => ({
 		}
 	},
 
+	logout: async () => {
+		const res: boolean = await useAuthStore.getState().revoke();
+		if (res) {
+			// TODO: show a successfully logged out page
+			console.log("logged out successfully");
+			set({ isAuthenticated: false, isLoading: false });
+		}
+	},
+
 	refresh: async () => {
 		set({ isLoading: true });
 		try {
 			console.log("Refreshing access token");
 			const res = await api.get("/token/refresh");
 			console.log(`Token refresh result: ${res}`);
-			useAuthStore.getState().init();
+			useAuthStore.getState().login();
 		} catch (error) {
 			console.error("Token refresh failed", error);
 			set({ isLoading: false });
+		}
+	},
+
+	revoke: async () => {
+		try {
+			const res = await api.delete("/token/revoke");
+			console.log(`Revoked: ${res.data.isRevoked}`);
+			return res.data.isRevoked;
+		} catch (error) {
+			console.error(error);
 		}
 	},
 
