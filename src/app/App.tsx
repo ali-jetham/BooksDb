@@ -32,7 +32,7 @@ function App() {
 	}
 
 	return (
-		<div className="flex h-screen min-h-screen w-screen min-w-screen flex-col dark:bg-neutral-800 dark:text-white">
+		<div className="flex h-screen min-h-screen w-screen min-w-screen flex-col selection:bg-folly-500/50 dark:bg-neutral-800 dark:text-white">
 			<Routes>
 				<Route path="/" element={<HomeLayout />}>
 					<Route index element={<Home />} />

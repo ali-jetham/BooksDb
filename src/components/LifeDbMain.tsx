@@ -45,7 +45,8 @@ export default function LifeDbMain(): React.JSX.Element {
 		setActiveModal(modalMap[type] ?? undefined);
 	}
 
-	function handleCellVaueChanged(params) {
+	// FIX: make this dynamic should work with all the "type"
+	async function handleCellVaueChanged(params) {
 		console.log(params.data);
 		const { userBookId, status, rating, dateAdded, dateStarted, dateFinished, notes, favourite } =
 			params.data;
@@ -58,7 +59,8 @@ export default function LifeDbMain(): React.JSX.Element {
 			notes,
 			favourite,
 		};
-		booksApi.update(userBookId, bookData);
+		const res = await booksApi.update(userBookId, bookData);
+		console.log(`updated: ${JSON.stringify(res)}`);
 	}
 
 	return (
