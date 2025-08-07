@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { booksApi } from "../../api/booksApi";
-import type { BookRowData } from "../../utils/types";
+import type { BookData } from "../../utils/types";
 
 export default function Book(): React.JSX.Element {
-	const [bookData, setBookData] = useState<Partial<BookRowData>>({});
+	const [bookData, setBookData] = useState<BookData>();
 	const [notes, setNotes] = useState<string>("");
 
 	const { id } = useParams();
@@ -20,7 +20,7 @@ export default function Book(): React.JSX.Element {
 	}, []);
 
 	useEffect(() => {
-		if (!bookData.userBookId) {
+		if (!bookData?.userBookId) {
 			return;
 		}
 
@@ -32,7 +32,7 @@ export default function Book(): React.JSX.Element {
 
 				const updateUserBook = async () => {
 					const res = await booksApi.update(bookData.userBookId, bookUpdate);
-					setBookData((prev) => ({ ...prev, notes: res.notes }));
+					setBookData((prev) => (prev ? { ...prev, notes: res.notes } : prev));
 					console.log("updated successfully:", res);
 				};
 
@@ -52,11 +52,11 @@ export default function Book(): React.JSX.Element {
 			</div>
 
 			<div className="col-start-2 row-start-1 flex flex-col gap-2 overflow-auto">
-				<h1 className="text-4xl">{bookData.title}</h1>
+				<h1 className="text-4xl">{bookData?.title}</h1>
 				<div>
-					<p>By {bookData.authors}</p>
-					<p className="text-sm">{bookData.publicationDate && bookData.publicationDate}</p>
-					<p className="text-sm">{bookData.publisher && bookData.publisher}</p>
+					<p>By {bookData?.authors}</p>
+					<p className="text-sm">{bookData?.publicationDate && bookData?.publicationDate}</p>
+					<p className="text-sm">{bookData?.publisher && bookData?.publisher}</p>
 				</div>
 				<p>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, laudantium facilis?

@@ -30,15 +30,15 @@ export default function Modal({
 	//
 	const [searchQuery, setSearchQuery] = useState<string>("");
 	const searchQueryRef = useRef(searchQuery);
-	const inputRef = useRef(null);
-	const listRef = useRef(null);
+	const inputRef = useRef<HTMLInputElement>(null);
+	const listRef = useRef<HTMLDivElement>(null);
 
 	const setActiveModal = useAppUiStore((state) => state.actions.setActiveModal);
 
 	function handleSearch() {
 		onSearch(searchQueryRef.current);
 		// TODO: move focus from input to the div
-		inputRef.current.blur();
+		inputRef.current?.blur();
 		if (listRef.current) {
 			listRef.current.focus();
 		}

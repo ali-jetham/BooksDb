@@ -3,6 +3,10 @@ import LinkRenderer from "../components/cellRenderer/LinkRenderer";
 
 type BookStatus = "ToRead" | "Reading" | "Read" | "Paused" | "Abandoned";
 
+export type BookData = BookRowData & {
+	notes: string;
+};
+
 export type BookRowData = {
 	internalId: string;
 	externalId: string;

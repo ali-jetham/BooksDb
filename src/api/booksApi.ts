@@ -1,5 +1,5 @@
 import { getIsoDate } from "../utils/date";
-import type { BookRowData } from "../utils/types";
+import type { BookData, BookRowData } from "../utils/types";
 import { api } from "./api";
 
 async function search(searchTerm: string) {
@@ -20,7 +20,7 @@ async function add(bookData: BookRowData) {
 	} catch (error) {}
 }
 
-async function update(userBookId: string, bookData: Partial<BookRowData>) {
+async function update(userBookId: string, bookData: Partial<BookData>) {
 	try {
 		const res = await api.patch(`books/${userBookId}`, bookData);
 		return res.data;

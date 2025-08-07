@@ -1,5 +1,10 @@
 import { PlusIcon } from "@phosphor-icons/react";
-import { colorSchemeDarkWarm, themeQuartz, type ColDef } from "ag-grid-community";
+import {
+	colorSchemeDarkWarm,
+	themeQuartz,
+	type ColDef,
+	type CellValueChangedEvent,
+} from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import { useEffect, useState } from "react";
 import { api } from "../api/api";
@@ -21,7 +26,8 @@ export default function LifeDbMain(): React.JSX.Element {
 		rowBorder: false,
 		backgroundColor: "#262626",
 	});
-	const { type } = useParams();
+	const params = useParams();
+	const type: string | undefined = params.type;
 	const [rowData, setRowData] = useState([]);
 	const [colDefs, setColDefs] = useState<ColDef[]>(bookColDef);
 
@@ -42,11 +48,11 @@ export default function LifeDbMain(): React.JSX.Element {
 		const modalMap: Record<string, ActiveModal> = {
 			books: "addBook",
 		};
-		setActiveModal(modalMap[type] ?? undefined);
+		setActiveModal(type ? modalMap[type] : undefined);
 	}
 
 	// FIX: make this dynamic should work with all the "type"
-	async function handleCellVaueChanged(params) {
+	async function handleCellVaueChanged(params: CellValueChangedEvent) {
 		console.log(params.data);
 		const { userBookId, status, rating, dateAdded, dateStarted, dateFinished, notes, favourite } =
 			params.data;
