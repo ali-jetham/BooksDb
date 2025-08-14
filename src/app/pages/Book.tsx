@@ -58,11 +58,9 @@ export default function Book(): React.JSX.Element {
 					<p className="text-sm">{bookData?.publicationDate && bookData?.publicationDate}</p>
 					<p className="text-sm">{bookData?.publisher && bookData?.publisher}</p>
 				</div>
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, laudantium facilis?
-					Ducimus ipsum repellendus accusantium ipsam est odit possimus officia? Autem officia
-					accusantium vero nulla aut nostrum voluptate maiores esse.
-				</p>
+				{/* <p>
+					Descrioption goes here
+				</p> */}
 			</div>
 			<div className="col-span-2">
 				<h1 className="pb-2 text-2xl">Notes</h1>

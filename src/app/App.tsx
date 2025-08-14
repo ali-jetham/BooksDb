@@ -25,7 +25,7 @@ function App() {
 		if (!isLoading && isAuthenticated) {
 			navigate("/app/books", { replace: true });
 		}
-	}, []); // NOTE: [isLoading, isAuthenticated] add if issues
+	}, [isLoading, isAuthenticated]); // NOTE: [isLoading, isAuthenticated] add if issues
 
 	if (isLoading) {
 		return <div className="dark:bg-neutral-800" />;
