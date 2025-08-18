@@ -30,6 +30,7 @@ export default function Modal({
 	//
 	const [searchQuery, setSearchQuery] = useState<string>("");
 	const searchQueryRef = useRef(searchQuery);
+	const overlayRef = useRef<HTMLDivElement>(null);
 	const inputRef = useRef<HTMLInputElement>(null);
 	const listRef = useRef<HTMLDivElement>(null);
 
@@ -55,19 +56,19 @@ export default function Modal({
 
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
-			console.log(`pressed: ${e.key}`);
-
 			if (e.key === "ArrowDown") {
-				console.log(`length: ${itemsEl.length}`);
 				setFocusedItem((prev) => (prev + 1) % itemsEl.length);
 			} else if (e.key === "ArrowUp") {
 				setFocusedItem((prev) => (prev - 1 + itemsEl.length) % itemsEl.length);
 			} else if (e.key === "Escape") {
-				console.log("esc pressed");
 				e.preventDefault();
 				setActiveModal(undefined);
-			} else if (e.key === "Enter" && inputRef.current === document.activeElement) {
-				handleSearch();
+			} else if (e.key === "Enter") {
+				if (inputRef.current === document.activeElement) {
+					handleSearch();
+				} else if (itemsEl.length > 0) {
+					handleItemSelect();
+				}
 			}
 		}
 
@@ -80,19 +81,30 @@ export default function Modal({
 			}, 3000);
 		}
 
+		function handleMouseDown(event: MouseEvent) {
+			if (event.target === overlayRef.current) {
+				setActiveModal(undefined);
+			}
+		}
+
 		document.addEventListener("keydown", handleKeyDown);
 		document.addEventListener("mousemove", handleMouseMove);
 		document.addEventListener("wheel", handleMouseMove);
+		document.addEventListener("click", handleMouseDown);
 
 		return () => {
 			document.removeEventListener("keydown", handleKeyDown);
 			document.removeEventListener("mousemove", handleMouseMove);
 			document.removeEventListener("wheel", handleMouseMove);
+			document.removeEventListener("click", handleMouseDown);
 		};
 	}, [itemsEl.length]);
 
 	return (
-		<div className="fixed inset-0 z-999 flex items-start justify-center backdrop-blur-sm">
+		<div
+			ref={overlayRef}
+			className="fixed inset-0 z-999 flex items-start justify-center backdrop-blur-sm"
+		>
 			<div className="mt-30 flex w-[90%] flex-col gap-4 rounded-md p-4 md:max-w-[50%] dark:bg-neutral-700">
 				<div className="flex w-[100%] items-center gap-3">
 					<input

@@ -19,7 +19,7 @@ export default function AddBookModal(): React.JSX.Element {
 			}}
 			type="button"
 			// FIXME: find the same bg-color used by ag grid to highlight rows
-			className={`flex w-[100%] hover:cursor-pointer items-start gap-2 rounded-md p-1 ${index === focusedItem ? "bg-[rgba(239,71,100,0.15)]" : ""}`}
+			className={`flex w-[100%] items-start gap-2 rounded-md p-1 hover:cursor-pointer ${index === focusedItem ? "bg-[rgba(239,71,100,0.15)]" : ""}`}
 			onClick={() => {
 				console.log("clicked");
 				addBook();
@@ -53,7 +53,6 @@ export default function AddBookModal(): React.JSX.Element {
 		console.log(bookData);
 		const res = await booksApi.add(bookData);
 		// TODO: add res.data back somewhere in state
-		// redirect to the detailed page of the book
 	}
 
 	useEffect(() => {
