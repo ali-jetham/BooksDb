@@ -1,5 +1,5 @@
-FROM node:22-alpine
-
+# Stage 1: Build
+FROM node:22-alpine as builder
 WORKDIR /app
 
 COPY package.json ./
@@ -9,7 +9,14 @@ RUN npm i -g pnpm@10.11.0
 RUN pnpm i
 
 COPY . .
+RUN pnpm run build
 
-EXPOSE 5173
+# Stage 2: Serve the app
+FROM node:22-alpine
+WORKDIR /app
 
-CMD ["pnpm", "dev"]
+RUN pnpm i -g serve
+COPY --from=builder /app/dist ./dist
+
+EXPOSE 80
+CMD ["serve", "-s", "dist"]
