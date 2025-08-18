@@ -59,7 +59,6 @@ export default function Auth(props: AuthProps): React.JSX.Element {
 				{props.type === "signup" ? "Sign up" : "Log in"}
 			</h1>
 			<div ref={googleSignInBtnRef} id="buttonDiv" />
-			{/* <Outlet /> */}
 		</div>
 	);
 }
