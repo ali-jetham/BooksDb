@@ -14,9 +14,9 @@ export default function LifeDbHeader(): React.JSX.Element {
 			</NavLink>
 
 			<div className="gap-3">
-				<button type="button">
+				{/* <button type="button">
 					<GearIcon size={"2rem"} className="dark:fill-white" />
-				</button>
+				</button> */}
 				<button type="button" onClick={() => setShowProfileDropdown(!showProfileDropsdown)}>
 					<CircleIcon className="fill-black dark:fill-white" size={"2rem"} />
 				</button>

@@ -2,6 +2,7 @@
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { useAppUiStore } from "../../store/useAppUiStore";
+import { useOnClickOutside } from "usehooks-ts";
 
 type ModalItem = {
 	id: number;
@@ -30,7 +31,7 @@ export default function Modal({
 	//
 	const [searchQuery, setSearchQuery] = useState<string>("");
 	const searchQueryRef = useRef(searchQuery);
-	const overlayRef = useRef<HTMLDivElement>(null);
+	const modalRef = useRef<HTMLDivElement>(null);
 	const inputRef = useRef<HTMLInputElement>(null);
 	const listRef = useRef<HTMLDivElement>(null);
 
@@ -49,6 +50,12 @@ export default function Modal({
 		setActiveModal(undefined);
 		onItemSelected();
 	}
+
+	function handleClickOutside() {
+		setActiveModal(undefined);
+	}
+
+	useOnClickOutside(modalRef as React.RefObject<HTMLDivElement>, handleClickOutside);
 
 	useEffect(() => {
 		searchQueryRef.current = searchQuery;
@@ -81,31 +88,23 @@ export default function Modal({
 			}, 3000);
 		}
 
-		function handleMouseDown(event: MouseEvent) {
-			if (event.target === overlayRef.current) {
-				setActiveModal(undefined);
-			}
-		}
-
 		document.addEventListener("keydown", handleKeyDown);
 		document.addEventListener("mousemove", handleMouseMove);
 		document.addEventListener("wheel", handleMouseMove);
-		document.addEventListener("click", handleMouseDown);
 
 		return () => {
 			document.removeEventListener("keydown", handleKeyDown);
 			document.removeEventListener("mousemove", handleMouseMove);
 			document.removeEventListener("wheel", handleMouseMove);
-			document.removeEventListener("click", handleMouseDown);
 		};
 	}, [itemsEl.length]);
 
 	return (
-		<div
-			ref={overlayRef}
-			className="fixed inset-0 z-999 flex items-start justify-center backdrop-blur-sm"
-		>
-			<div className="mt-30 flex w-[90%] flex-col gap-4 rounded-md p-4 md:max-w-[50%] dark:bg-neutral-700">
+		<div className="fixed inset-0 z-999 flex items-start justify-center backdrop-blur-sm">
+			<div
+				ref={modalRef}
+				className="mt-30 flex w-[90%] flex-col gap-4 rounded-md p-4 md:max-w-[50%] dark:bg-neutral-700"
+			>
 				<div className="flex w-[100%] items-center gap-3">
 					<input
 						ref={inputRef}
