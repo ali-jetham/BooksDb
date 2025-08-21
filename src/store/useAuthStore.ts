@@ -10,7 +10,6 @@ type AuthStore = {
 	login: () => void;
 	logout: () => void;
 	refresh: () => void;
-	revoke: () => Promise<boolean>;
 	setIsAuthenticated: (val: boolean) => void;
 };
 
@@ -40,11 +39,13 @@ export const useAuthStore = create<AuthStore>((set) => ({
 	},
 
 	logout: async () => {
-		const res: boolean = await useAuthStore.getState().revoke();
-		if (res) {
-			// TODO: show a successfully logged out page
-			console.log("logged out successfully");
-			set({ isAuthenticated: false, isLoading: false });
+		try {
+			const res = await api.delete("/auth/logout");
+			if (res.data.isRevoked) {
+				set({ isAuthenticated: false, isLoading: false });
+			}
+		} catch (error) {
+			console.error("Failed to logout", error);
 		}
 	},
 
@@ -58,16 +59,6 @@ export const useAuthStore = create<AuthStore>((set) => ({
 		} catch (error) {
 			console.error("Token refresh failed", error);
 			set({ isLoading: false });
-		}
-	},
-
-	revoke: async () => {
-		try {
-			const res = await api.delete("/token/revoke");
-			console.log(`Revoked: ${res.data.isRevoked}`);
-			return res.data.isRevoked;
-		} catch (error) {
-			console.error(error);
 		}
 	},
 
