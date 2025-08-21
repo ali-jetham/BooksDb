@@ -17,7 +17,7 @@ api.interceptors.response.use(
 	async function (error: AxiosError) {
 		const config = error.config as any;
 
-		if (config.url.includes("/token/refresh")) {
+		if (config.url.includes("/auth/refresh")) {
 			// TODO: add some logout logic
 			return Promise.reject(error);
 		}

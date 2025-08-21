@@ -53,7 +53,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
 		set({ isLoading: true });
 		try {
 			console.log("Refreshing access token");
-			const res = await api.get("/token/refresh");
+			const res = await api.get("/auth/refresh");
 			console.log(`Token refresh result: ${res}`);
 			useAuthStore.getState().login();
 		} catch (error) {
