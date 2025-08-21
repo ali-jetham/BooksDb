@@ -5,6 +5,7 @@ import { api } from "../api/api";
 type AuthStore = {
 	isAuthenticated: boolean;
 	id: string | undefined;
+	name: string | undefined;
 	isLoading: boolean;
 	login: () => void;
 	logout: () => void;
@@ -14,9 +15,10 @@ type AuthStore = {
 };
 
 export const useAuthStore = create<AuthStore>((set) => ({
-	isAuthenticated: true,
+	isAuthenticated: false,
 	isLoading: true,
 	id: undefined,
+	name: undefined,
 
 	login: async function () {
 		console.log("useAuthStore: init called");
@@ -28,11 +30,12 @@ export const useAuthStore = create<AuthStore>((set) => ({
 			set({
 				isAuthenticated: res.data.isAuthenticated,
 				id: res.data.id,
+				name: res.data.name,
 				isLoading: false,
 			});
 		} catch (error) {
 			console.error(`Cannot authenticate user, ${error}`);
-			set({ isAuthenticated: true, isLoading: false });
+			set({ isAuthenticated: false, isLoading: false });
 		}
 	},
 
