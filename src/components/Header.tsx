@@ -16,7 +16,7 @@ export default function Header(): React.JSX.Element {
 			key={link.to}
 			to={link.to}
 			className={({ isActive }) =>
-				`rounded ${isActive ? "underline" : ""} ${link.label === "Login" ? "flex h-10 w-20 cursor-pointer items-center justify-center rounded-[.2rem] bg-folly text-white" : ""}`
+				`rounded ${isActive ? "underline" : ""} ${link.label === "Login" ? "flex h-10 w-20 cursor-pointer items-center justify-center rounded-[.2rem] bg-folly-500 text-white" : ""}`
 			}
 		>
 			{link.label}

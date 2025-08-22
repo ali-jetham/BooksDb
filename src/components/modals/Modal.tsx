@@ -47,7 +47,6 @@ export default function Modal({
 	}
 
 	function handleItemSelect() {
-		setActiveModal(undefined);
 		onItemSelected();
 	}
 

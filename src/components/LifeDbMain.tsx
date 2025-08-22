@@ -4,6 +4,7 @@ import {
 	themeQuartz,
 	type ColDef,
 	type CellValueChangedEvent,
+	colorSchemeLightWarm,
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import { useEffect, useState } from "react";
@@ -19,13 +20,21 @@ type LifeDbMainProps = {
 
 export default function LifeDbMain(): React.JSX.Element {
 	const setActiveModal = useAppUiStore((state) => state.actions.setActiveModal);
-	const colorScheme = themeQuartz.withPart(colorSchemeDarkWarm).withParams({
+	const colorSchemeDark = themeQuartz.withPart(colorSchemeDarkWarm).withParams({
 		accentColor: "#EF4764",
 		wrapperBorder: true,
 		headerRowBorder: true,
 		rowBorder: false,
 		backgroundColor: "#262626",
 	});
+	const colorSchemeLight = themeQuartz.withPart(colorSchemeLightWarm).withParams({
+		accentColor: "#EF4764",
+		wrapperBorder: true,
+		headerRowBorder: true,
+		rowBorder: false,
+		backgroundColor: "#FFFFFF",
+	});
+
 	const params = useParams();
 	const type: string | undefined = params.type;
 	const [rowData, setRowData] = useState([]);
@@ -72,16 +81,21 @@ export default function LifeDbMain(): React.JSX.Element {
 	return (
 		<main className="flex flex-1 flex-col items-center gap-10">
 			<div className="flex w-full justify-between">
-				<h1 className="prose text-center text-3xl text-gray-300">Your {type ?? "databases"}</h1>
+				<h1 className="text-center text-3xl">Your {type ?? "databases"}</h1>
 
 				<button
-					className="flex items-center gap-0.5 rounded-md bg-folly-500 p-1"
+					className="flex items-center gap-2 rounded-md bg-folly-500 p-1"
 					type="button"
 					onClick={() => {
 						handleClick();
 					}}
 				>
-					<PlusIcon className="fill-black dark:fill-white" size={"1.1rem"} />
+					<PlusIcon
+						fill="#000000"
+						weight="fill"
+						className="fill-white dark:fill-white"
+						size={"1.1rem"}
+					/>
 					<p className="prose text-white">Add {type ?? "DB"}</p>
 				</button>
 			</div>
@@ -89,7 +103,7 @@ export default function LifeDbMain(): React.JSX.Element {
 			{/* TODO: find out if this div/aggrid component can take up height automatically */}
 			<div className="w-[100%] flex-1 overflow-auto">
 				<AgGridReact
-					theme={colorScheme}
+					theme={colorSchemeDark}
 					rowData={rowData}
 					columnDefs={colDefs}
 					rowHeight={150}

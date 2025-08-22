@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { booksApi } from "../../api/booksApi";
 import type { BookRowData } from "../../utils/types";
 import Modal from "./Modal";
+import { useAppUiStore } from "../../store/useAppUiStore";
 
 export default function AddBookModal(): React.JSX.Element {
 	const [items, setItems] = useState<BookRowData[]>([]);
@@ -9,6 +10,7 @@ export default function AddBookModal(): React.JSX.Element {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
 	const hasMouseMoved = useRef(false);
+	const setActiveModal = useAppUiStore((state) => state.actions.setActiveModal);
 
 	console.log(items);
 	const itemsEl = items?.map((item, index) => (
@@ -21,7 +23,6 @@ export default function AddBookModal(): React.JSX.Element {
 			// FIXME: find the same bg-color used by ag grid to highlight rows
 			className={`flex w-[100%] items-start gap-2 rounded-md p-1 hover:cursor-pointer ${index === focusedItem ? "bg-[rgba(239,71,100,0.15)]" : ""}`}
 			onClick={() => {
-				console.log("clicked");
 				addBook();
 			}}
 			onMouseOver={() => {
@@ -49,6 +50,7 @@ export default function AddBookModal(): React.JSX.Element {
 	}
 
 	async function addBook() {
+		setActiveModal(undefined);
 		const bookData = items[focusedItem];
 		console.log(bookData);
 		const res = await booksApi.add(bookData);
