@@ -11,6 +11,7 @@ export default function AddBookModal(): React.JSX.Element {
 	const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
 	const hasMouseMoved = useRef(false);
 	const setActiveModal = useAppUiStore((state) => state.actions.setActiveModal);
+	const triggerRefresh = useAppUiStore((state) => state.actions.triggerRefresh);
 
 	console.log(items);
 	const itemsEl = items?.map((item, index) => (
@@ -55,6 +56,9 @@ export default function AddBookModal(): React.JSX.Element {
 		console.log(bookData);
 		const res = await booksApi.add(bookData);
 		// TODO: add res.data back somewhere in state
+		if (res) {
+			triggerRefresh("books");
+		}
 	}
 
 	useEffect(() => {

@@ -39,6 +39,7 @@ export default function LifeDbMain(): React.JSX.Element {
 	const type: string | undefined = params.type;
 	const [rowData, setRowData] = useState([]);
 	const [colDefs, setColDefs] = useState<ColDef[]>(bookColDef);
+	const refreshTrigger = useAppUiStore((state) => state.refreshTriggers[type as string]);
 
 	// FIXME: make sure this runs first completely before loading rowData in the AgGridReact component
 	useEffect(() => {
@@ -50,7 +51,7 @@ export default function LifeDbMain(): React.JSX.Element {
 		}
 
 		fetchData();
-	}, []);
+	}, [refreshTrigger]);
 
 	function handleClick() {
 		console.log(`handle click called with type ${type}`);
